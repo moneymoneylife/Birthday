@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAPPY BIRTHDAY PARTY!</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+:root {
+  --pink:#ff4fa0;
+  --purple:#8955ff;
+  --yellow:#ffe45e;
+  --blue:#67dfff;
+}
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  overflow-x:hidden;
+  font-family:'Noto Sans KR',sans-serif;
+  color:#37204d;
+  background:#fff1f8;
+}
+
+button { font:inherit; }
+
+/* 공통 효과 */
+
+.float-deco {
+  position:fixed;
+  pointer-events:none;
+  z-index:1;
+  animation:floatAround var(--speed) ease-in-out infinite alternate;
+  opacity:.8;
+}
+
+@keyframes floatAround {
+  from { transform:translateY(0) rotate(-15deg); }
+  to { transform:translateY(-35px) rotate(20deg); }
+}
+
+@keyframes bounce {
+  0%,100% { transform:translateY(0) rotate(-3deg); }
+  50% { transform:translateY(-18px) rotate(3deg); }
+}
+
+@keyframes wiggle {
+  0%,100% { transform:rotate(-8deg); }
+  50% { transform:rotate(8deg); }
+}
+
+@keyframes rainbow {
+  0% { background-position:0% 50%; }
+  100% { background-position:200% 50%; }
+}
+
+@keyframes marquee {
+  to { transform:translateX(-50%); }
+}
+
+@keyframes flash {
+  0%,100% { opacity:1; }
+  50% { opacity:.5; }
+}
+
+/* 오프닝 */
+
+#party {
+  position:fixed;
+  inset:0;
+  z-index:100;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.flash-screen {
+  position:absolute;
+  inset:0;
+  background:white;
+  animation:screenFlash .7s forwards;
+}
+
+@keyframes screenFlash {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+
+.firework {
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--color);
+  box-shadow:0 0 15px var(--color);
+  animation:firework 1.3s ease-out forwards;
+}
+
+@keyframes firework {
+  0% { transform:translate(0,0) scale(1);opacity:1; }
+  100% {
+    transform:translate(var(--dx),var(--dy)) scale(.1);
+    opacity:0;
+  }
+}
+
+.confetti {
+  position:absolute;
+  left:var(--x);
+  top:-30px;
+  width:10px;
+  height:17px;
+  background:var(--color);
+  border-radius:3px;
+  animation:confetti var(--duration) linear forwards;
+}
+
+@keyframes confetti {
+  to {
+    transform:translate(var(--drift),110vh) rotate(1000deg);
+    opacity:.5;
+  }
+}
+
+.balloon {
+  position:absolute;
+  bottom:-150px;
+  left:var(--x);
+  font-size:var(--size);
+  animation:balloon var(--duration) ease-in forwards;
+}
+
+@keyframes balloon {
+  0% { transform:translateY(0) rotate(-10deg);opacity:0; }
+  10% { opacity:1; }
+  50% { transform:translate(35px,-65vh) rotate(12deg); }
+  100% { transform:translate(-20px,-130vh) rotate(-12deg);opacity:0; }
+}
+
+/* 메인 */
+
+.hero {
+  min-height:100svh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:100px 20px;
+  background:
+    radial-gradient(circle at 10% 20%,#ffb9df 0 10%,transparent 30%),
+    radial-gradient(circle at 90% 80%,#b8a0ff 0 12%,transparent 35%),
+    linear-gradient(135deg,#ffb9d9,#e8caff,#bcecff,#fff1a7);
+  background-size:200% 200%;
+  animation:rainbow 10s linear infinite alternate;
+}
+
+.hero:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(#ffffff 2px,transparent 2px);
+  background-size:35px 35px;
+  opacity:.35;
+}
+
+.hero-inner {
+  position:relative;
+  z-index:2;
+  width:min(1100px,100%);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:40px;
+}
+
+.hero-text { text-align:center; }
+
+.label {
+  display:inline-block;
+  background:#fff;
+  color:#ff4fa0;
+  padding:12px 22px;
+  border-radius:50px;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:5px 5px 0 #ff76b6;
+  transform:rotate(-4deg);
+}
+
+.hero h1 {
+  font-family:'Black Han Sans',sans-serif;
+  font-size:clamp(65px,10vw,125px);
+  line-height:.95;
+  margin:30px 0;
+  color:white;
+  -webkit-text-stroke:2px #ff4fa0;
+  text-shadow:5px 6px 0 #a35bff,10px 12px 0 #ffca55;
+  animation:bounce 2s infinite;
+}
+
+.hero h1 span {
+  display:block;
+  color:#fff35f;
+}
+
+.hero-text p {
+  font-family:'Jua',sans-serif;
+  font-size:21px;
+  color:#853a9e;
+  line-height:1.8;
+}
+
+.main-photo {
+  position:relative;
+  width:min(400px,85vw);
+  margin:auto;
+  padding:13px 13px 55px;
+  background:white;
+  box-shadow:0 25px 50px #713e9b45;
+  transform:rotate(3deg);
+  animation:bounce 4s ease-in-out infinite;
+}
+
+.main-photo img {
+  width:100%;
+  height:470px;
+  object-fit:cover;
+  display:block;
+}
+
+.main-photo p {
+  position:absolute;
+  bottom:5px;
+  left:0;
+  width:100%;
+  text-align:center;
+  font-family:'Black Han Sans',sans-serif;
+  font-size:23px;
+  color:#ff4fa0;
+}
+
+.deco {
+  position:absolute;
+  font-size:65px;
+  z-index:3;
+  animation:wiggle 2s infinite;
+}
+
+.deco.d1 { top:-35px;right:-30px; }
+.deco.d2 { bottom:35px;left:-40px; }
+.deco.d3 { top:40%;left:-50px; }
+
+/* 반짝이는 배너 */
+
+.banner {
+  background:#39234e;
+  color:white;
+  padding:17px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:'Black Han Sans',sans-serif;
+  font-size:23px;
+}
+
+.banner-track {
+  display:inline-block;
+  animation:marquee 15s linear infinite;
+}
+
+.banner span {
+  color:#ffe45e;
+  margin:0 25px;
+}
+
+/* 섹션 공통 */
+
+section { padding:100px 20px; }
+
+.heading {
+  text-align:center;
+  margin-bottom:55px;
+}
+
+.heading small {
+  color:#ff4fa0;
+  font-weight:900;
+  letter-spacing:.3em;
+}
+
+.heading h2 {
+  font-family:'Black Han Sans',sans-serif;
+  font-size:clamp(40px,7vw,70px);
+  margin:12px 0;
+  color:#57336e;
+  text-shadow:3px 4px 0 #ffc5e1;
+}
+
+.heading p {
+  color:#937ba4;
+  font-family:'Jua',sans-serif;
+  font-size:17px;
+}
+
+/* 갤러리 */
+
+.gallery {
+  background:linear-gradient(135deg,#fff1f7,#eee4ff);
+  position:relative;
+  overflow:hidden;
+}
+
+.gallery:before {
+  content:"♡ ✦ ♡ ✧ ♡";
+  position:absolute;
+  font-size:90px;
+  color:#ff9dcf20;
+  top:30px;
+  left:0;
+  width:100%;
+  text-align:center;
+}
+
+.grid {
+  width:min(1100px,100%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:25px;
+}
+
+.card {
+    background: white;
+    padding: 9px 9px 42px;
+    /* 기존의 나머지 디자인 속성은 그대로 유지 */
+}
+
+.card.visible {
+  opacity:1;
+  transform:translateY(0) rotate(var(--tilt));
+}
+
+.card:hover {
+  transform:translateY(-15px) rotate(0) scale(1.08);
+  z-index:5;
+}
+
+.card img {
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+}
+
+.card p {
+    text-align: center;
+    margin: 18px 0 0;
+    line-height: 1.5;
+    position: relative;
+}
+
+/* 편지 */
+
+.message {
+  background:linear-gradient(135deg,#ff68a9,#8c56ff);
+  color:white;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.message .heading h2 {
+  color:white;
+  text-shadow:4px 5px 0 #a83caa;
+}
+
+.message .heading small { color:#fff36d; }
+
+.letter {
+  width:min(700px,100%);
+  margin:auto;
+  padding:45px 30px;
+  background:#ffffff24;
+  border:2px solid #ffffff80;
+  border-radius:25px;
+  backdrop-filter:blur(10px);
+  line-height:2.2;
+  font-family:'Jua',sans-serif;
+  font-size:19px;
+  box-shadow:0 15px 40px #42207830;
+}
+
+.letter strong {
+  color:#fff36d;
+  font-size:24px;
+}
+
+/* 마지막 */
+
+.end {
+  text-align:center;
+  padding:100px 20px;
+  background:linear-gradient(135deg,#ffe5f1,#fff2b5,#d9d0ff);
+  position:relative;
+  overflow:hidden;
+}
+
+.end h2 {
+  font-family:'Black Han Sans',sans-serif;
+  font-size:clamp(40px,8vw,85px);
+  color:#ff4fa0;
+  text-shadow:4px 5px white,8px 9px #b98aff;
+  animation:bounce 2s infinite;
+}
+
+.end p {
+  font-family:'Jua',sans-serif;
+  color:#86559b;
+  font-size:19px;
+}
+
+/* 클릭 효과 */
+
+.spark {
+  position:fixed;
+  pointer-events:none;
+  z-index:200;
+  font-size:25px;
+  animation:spark 1s ease-out forwards;
+}
+
+@keyframes spark {
+  to {
+    transform:translate(var(--dx),var(--dy)) scale(1.8) rotate(180deg);
+    opacity:0;
+  }
+}
+
+#topBtn {
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:50px;
+  height:50px;
+  border:0;
+  border-radius:50%;
+  background:#ff4fa0;
+  color:white;
+  font-size:23px;
+  box-shadow:0 5px 20px #0002;
+  cursor:pointer;
+  opacity:0;
+  z-index:30;
+}
+
+#topBtn.show { opacity:1; }
+
+@media(max-width:760px) {
+  .hero-inner {
+    grid-template-columns:1fr;
+    gap:55px;
+  }
+
+  .hero h1 { font-size:75px; }
+
+  .main-photo img { height:370px; }
+
+  .grid {
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+
+  .grid .card:last-child {
+    grid-column:1/-1;
+    width:50%;
+    justify-self:center;
+  }
+
+  section { padding:75px 16px; }
+
+  .letter { font-size:16px; }
+}
+/* 입장 화면 */
+#entryScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background:
+        radial-gradient(circle at 20% 20%, #ffb6dc, transparent 40%),
+        radial-gradient(circle at 80% 80%, #bba4ff, transparent 40%),
+        linear-gradient(135deg, #ff75b7, #a77bff, #75dcff);
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+#entryScreen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.entry-title {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: clamp(45px, 9vw, 90px);
+    color: white;
+    text-shadow: 5px 6px 0 #a34cff;
+    animation: bounce 1.5s infinite;
+    margin-bottom: 15px;
+}
+
+.entry-subtitle {
+    color: white;
+    font-family: 'Jua', sans-serif;
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+
+#enterBtn {
+    border: 4px solid white;
+    border-radius: 60px;
+    padding: 20px 55px;
+    background: linear-gradient(135deg, #ff4fa0, #ff9b45);
+    color: white;
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 0 10px 0 #a83b9b;
+    animation: bounce 1.5s infinite;
+    transition: .3s;
+}
+
+#enterBtn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 15px 25px #742e9c66;
+}
+
+.entry-deco {
+    font-size: 55px;
+    margin-bottom: 20px;
+    animation: wiggle 1s infinite;
+}
+/* 🎵 예쁜 뮤직 버튼 */
+#musicBtn {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 1000;
+
+    padding: 13px 23px;
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 50px;
+
+    background: linear-gradient(135deg, #ff8fc7, #b99aff);
+    color: white;
+
+    font-family: 'Jua', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(220, 120, 220, 0.3),
+        0 0 15px rgba(255, 180, 230, 0.5);
+
+    transition: all 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 */
+#musicBtn:hover {
+    transform: translateY(-5px) scale(1.08);
+
+    box-shadow:
+        0 8px 20px rgba(220, 120, 220, 0.4),
+        0 0 25px rgba(255, 180, 230, 0.8);
+}
+
+/* 클릭했을 때 */
+#musicBtn:active {
+    transform: scale(0.93);
+}
+
+/* 은은하게 반짝이는 효과 */
+@keyframes musicGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 180, 230, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 22px rgba(255, 180, 230, 0.9);
+    }
+}
+
+#musicBtn {
+    animation: musicGlow 2s infinite;
+}
+</style>
+</head>
+
+<body>
+  <!-- 입장 화면 -->
+<div id="entryScreen">
+
+    <div class="entry-deco">🎂 🎈 🎁</div>
+
+    <h1 class="entry-title">
+        HAPPY<br>BIRTHDAY!
+    </h1>
+
+    <p class="entry-subtitle">
+        오늘의 특별한 주인공을 위한 파티가 시작됩니다 ♡
+    </p>
+
+    <button id="enterBtn">
+        🎉 ENTER PARTY 🎉
+    </button>
+
+    <p style="color:white; margin-top:30px; font-family:'Jua';">
+        CLICK TO START THE PARTY!
+    </p>
+
+</div>
+<!-- 배경음악 -->
+<audio id="backgroundMusic" autoplay loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">
+    🎵 MUSIC ON
+</button>
+<div id="party">
+  <div class="flash-screen"></div>
+</div>
+
+<header class="hero">
+
+  <div class="hero-inner">
+
+    <div class="hero-text">
+      <div class="label">✦ TODAY IS YOUR SPECIAL DAY ✦</div>
+
+      <h1>
+        HAPPY
+        <span>BIRTHDAY!</span>
+      </h1>
+
+      <p>
+        오늘의 주인공 등장!! ♡<br>
+        세상에서 제일 반짝이는 너를 위해!
+      </p>
+    </div>
+
+    <div class="main-photo">
+
+      <div class="deco d1">💖</div>
+      <div class="deco d2">🎀</div>
+      <div class="deco d3">⭐</div>
+
+      <img src="image/main.jpg" alt="생일 주인공">
+
+      <p>OUR SPECIAL STAR ♡</p>
+
+    </div>
+
+  </div>
+
+</header>
+
+<div class="banner">
+  <div class="banner-track">
+    HAPPY BIRTHDAY!! <span>♡</span>
+    PARTY TIME!! <span>✦</span>
+    YOU ARE THE BEST!! <span>★</span>
+    LOVE YOU!! <span>♡</span>
+    HAPPY BIRTHDAY!! <span>♡</span>
+    PARTY TIME!! <span>✦</span>
+    YOU ARE THE BEST!! <span>★</span>
+    LOVE YOU!! <span>♡</span>
+  </div>
+</div>
+
+<section class="gallery">
+
+  <div class="heading">
+    <small>✦ OUR PRECIOUS MEMORIES ✦</small>
+    <h2>PHOTO PARTY!!</h2>
+    <p>귀여운 순간들 전부 모아보기 ♡</p>
+  </div>
+
+  <div class="grid" id="photoGrid"></div>
+
+</section>
+
+<section class="message">
+
+  <div class="heading">
+    <small>♡ FROM US TO YOU ♡</small>
+    <h2>DEAR. BIRTHDAY STAR</h2>
+    <p>오늘은 네가 제일 빛나는 날!</p>
+  </div>
+
+  <div class="letter">
+    🎉 생일 진심으로 축하해!! 🎉<br><br>
+
+    오늘 하루만큼은 세상에서 제일 행복했으면 좋겠어!<br>
+    맛있는 것도 많이 먹고, 웃을 일도 가득하고,<br>
+    앞으로 하고 싶은 일들도 전부 이루어지길 바라.<br><br>
+
+    언제나 우리에게 소중한 사람이라는 거 잊지 마!<br>
+
+    <strong>LOVE YOU FOREVER ♡</strong>
+  </div>
+
+</section>
+
+<footer class="end">
+
+  <h2>HAPPY BIRTHDAY!!</h2>
+
+  <p>오늘의 주인공은 바로 너야!! 💗</p>
+
+  <p>✦ MADE WITH LOVE ✦</p>
+
+</footer>
+
+<button id="topBtn">↑</button>
+
+<script>
+const music = document.getElementById("backgroundMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let isMusicPlaying = false;
+
+// 페이지에 들어오면 자동으로 음악 재생 시도
+window.addEventListener("load", async () => {
+    try {
+        await music.play();
+
+        isMusicPlaying = true;
+        musicBtn.innerHTML = "🎵 MUSIC OFF";
+
+    } catch (error) {
+        // 자동재생이 차단되면 버튼으로 재생 가능
+        isMusicPlaying = false;
+        musicBtn.innerHTML = "🎵 MUSIC ON";
+    }
+});
+
+// 음악 켜기 / 끄기
+async function toggleMusic() {
+    if (!isMusicPlaying) {
+        try {
+            await music.play();
+            isMusicPlaying = true;
+            musicBtn.innerHTML = "🎵 MUSIC OFF";
+        } catch (error) {
+            alert("음악 파일을 확인해주세요!");
+        }
+    } else {
+        music.pause();
+        isMusicPlaying = false;
+        musicBtn.innerHTML = "🎵 MUSIC ON";
+    }
+}
+
+/* 사진 */
+
+const captions = [
+  "CUTIE ♡",
+  "BEST DAY",
+  "MY STAR",
+  "SHINE ON",
+  "LOVE YOU",
+  "HAPPY!",
+  "MEMORIES",
+  "SO PRETTY",
+  "FOREVER",
+  "SPECIAL"
+];
+
+const grid = document.getElementById("photoGrid");
+
+const angles = [-5,3,-2,4,-3,2,-4,3,-2,5];
+
+captions.forEach((caption,i)=>{
+
+  const card = document.createElement("article");
+
+  card.className = "card";
+
+  card.style.setProperty("--tilt",angles[i]+"deg");
+
+  card.innerHTML = `
+    <img src="image/photo${i+1}.jpg" alt="사진 ${i+1}">
+    <p>${caption}</p>
+  `;
+
+  grid.appendChild(card);
+
+});
+
+/* 스크롤 애니메이션 */
+
+const observer = new IntersectionObserver(entries=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+      entry.target.classList.add("visible");
+
+      observer.unobserve(entry.target);
+
+    }
+
+  });
+
+},{threshold:.1});
+
+document.querySelectorAll(".card").forEach((card,i)=>{
+
+  card.style.transitionDelay=(i%5)*100+"ms";
+
+  observer.observe(card);
+
+});
+
+/* 폭죽 */
+
+const party = document.getElementById("party");
+
+const colors = [
+  "#ff4fa0",
+  "#ffe45e",
+  "#8955ff",
+  "#67dfff",
+  "#ffffff",
+  "#ff8a55"
+];
+
+function fireworks(x,y){
+
+  for(let i=0;i<45;i++){
+
+    const f=document.createElement("i");
+
+    f.className="firework";
+
+    const angle=Math.PI*2*i/45;
+
+    const distance=80+Math.random()*180;
+
+    f.style.setProperty("--x",x+"vw");
+    f.style.setProperty("--y",y+"vh");
+
+    f.style.setProperty(
+      "--dx",
+      Math.cos(angle)*distance+"px"
+    );
+
+    f.style.setProperty(
+      "--dy",
+      Math.sin(angle)*distance+"px"
+    );
+
+    f.style.setProperty(
+      "--color",
+      colors[Math.floor(Math.random()*colors.length)]
+    );
+
+    party.appendChild(f);
+
+    setTimeout(()=>f.remove(),1400);
+
+  }
+
+}
+
+/* 컨페티 */
+
+function confetti(){
+
+  for(let i=0;i<130;i++){
+
+    const c=document.createElement("i");
+
+    c.className="confetti";
+
+    c.style.setProperty("--x",Math.random()*100+"vw");
+
+    c.style.setProperty(
+      "--color",
+      colors[Math.floor(Math.random()*colors.length)]
+    );
+
+    c.style.setProperty(
+      "--duration",
+      (3+Math.random()*4)+"s"
+    );
+
+    c.style.setProperty(
+      "--drift",
+      (Math.random()*300-150)+"px"
+    );
+
+    party.appendChild(c);
+
+    setTimeout(()=>c.remove(),7500);
+
+  }
+
+}
+
+/* 풍선 */
+
+function balloons(){
+
+  const emojis=[
+    "🎈","💗","🎈","💜","🎈",
+    "⭐","🎈","💛","🎈","💖",
+    "🎈","🎀","🎈","💙","🎈"
+  ];
+
+  emojis.forEach((emoji,i)=>{
+
+    const b=document.createElement("span");
+
+    b.className="balloon";
+
+    b.textContent=emoji;
+
+    b.style.setProperty(
+      "--x",
+      (Math.random()*95)+"vw"
+    );
+
+    b.style.setProperty(
+      "--size",
+      (65+Math.random()*65)+"px"
+    );
+
+    b.style.setProperty(
+      "--duration",
+      (6+Math.random()*4)+"s"
+    );
+
+    party.appendChild(b);
+
+    setTimeout(()=>b.remove(),11000);
+
+  });
+
+}
+
+/* 오프닝 파티 */
+
+function startParty(){
+
+  fireworks(50,45);
+
+  fireworks(15,30);
+
+  fireworks(85,30);
+
+  confetti();
+
+  balloons();
+
+  setTimeout(()=>fireworks(30,65),400);
+
+  setTimeout(()=>fireworks(70,60),800);
+
+  setTimeout(()=>fireworks(50,20),1200);
+
+  setTimeout(()=>{
+    party.querySelector(".flash-screen")?.remove();
+  },800);
+
+  setTimeout(()=>party.remove(),11000);
+
+}
+/* 입장 버튼 클릭 이벤트 */
+
+const entryScreen = document.getElementById("entryScreen");
+const enterBtn = document.getElementById("enterBtn");
+
+enterBtn.addEventListener("click", async () => {
+
+    // 화면을 맨 위로 이동
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+
+    // 중복 클릭 방지
+    enterBtn.disabled = true;
+
+    // 입장 화면 사라지기
+    entryScreen.classList.add("hide");
+
+    // 음악 재생
+    try {
+        await music.play();
+
+        isMusicPlaying = true;
+        musicBtn.innerHTML = "🎵 MUSIC OFF";
+
+    } catch (error) {
+        console.log("음악 재생 오류:", error);
+    }
+
+    // 폭죽과 파티 효과 시작
+    startParty();
+
+});
+/* 화면 클릭 시 파티 효과 */
+
+document.addEventListener("click",e=>{
+
+  const emojis=["💖","⭐","✨","🎉","♡","🎀","💜"];
+
+  for(let i=0;i<9;i++){
+
+    const s=document.createElement("span");
+
+    s.className="spark";
+
+    s.textContent=emojis[
+      Math.floor(Math.random()*emojis.length)
+    ];
+
+    s.style.left=e.clientX+"px";
+
+    s.style.top=e.clientY+"px";
+
+    s.style.setProperty(
+      "--dx",
+      (Math.random()*180-90)+"px"
+    );
+
+    s.style.setProperty(
+      "--dy",
+      (Math.random()*-180-20)+"px"
+    );
+
+    document.body.appendChild(s);
+
+    setTimeout(()=>s.remove(),1000);
+
+  }
+
+});
+
+/* 맨 위로 */
+
+const topBtn=document.getElementById("topBtn");
+
+window.addEventListener("scroll",()=>{
+
+  topBtn.classList.toggle("show",window.scrollY>500);
+
+});
+
+topBtn.addEventListener("click",()=>{
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+});
+
+</script>
+
+
+
+</body>
+</html>
